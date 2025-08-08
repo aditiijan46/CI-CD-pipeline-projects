@@ -19,13 +19,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'cd Practice-pipeline-projects && npm install'
+                sh 'cd Practice-pipeline-project && npm install'
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t $IMAGE_NAME Practice-pipeline-projects/'
+                sh 'docker build -t $IMAGE_NAME Practice-pipeline-project/'
             }
         }
 
