@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = 'aditiijan46/hello-world-node'
+        DOCKER_CREDENTIALS_ID = 'docker-hub-creds'
+    }
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/aditiijan46/hello-world-node.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME .'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: "${DOCKER_CREDENTIALS_ID}",
+                    usernameVariable: 'aditiijan46',
+                    passwordVariable: 'shubhamaditi')]) {
+                    sh """
+                        echo $PASSWORD | docker login -u $USERNAME --password-stdin
+                        docker push $IMAGE_NAME
+                    """
+                }
+            }
+        }
+    }
+}
