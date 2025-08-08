@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'yourdockerhubusername/hello-world-node'
+        IMAGE_NAME = 'aditiijan46/hello-world-node'
         DOCKER_CREDENTIALS_ID = 'docker-hub-creds'
     }
 
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/yourusername/hello-world-node.git'
+                git 'https://github.com/aditiijan46/hello-world-node.git'
             }
         }
 
@@ -29,8 +29,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: "${DOCKER_CREDENTIALS_ID}",
-                    usernameVariable: 'USERNAME',
-                    passwordVariable: 'PASSWORD')]) {
+                    usernameVariable: 'aditiijan46',
+                    passwordVariable: 'shubhamaditi')]) {
                     sh """
                         echo $PASSWORD | docker login -u $USERNAME --password-stdin
                         docker push $IMAGE_NAME
