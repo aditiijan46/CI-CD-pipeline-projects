@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'aditiijan46/hello-world-node'
+        IMAGE_NAME = 'aditiijan46/hello-world-nod'
         DOCKER_CREDENTIALS_ID = 'docker-hub-creds'
     }
 
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/aditiijan46/hello-world-node.git'
+                git branch: 'main', url: 'https://github.com/aditiijan46/CI-CD-pipeline-projects.git'
             }
         }
 
