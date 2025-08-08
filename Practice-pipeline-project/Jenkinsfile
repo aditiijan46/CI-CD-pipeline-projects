@@ -43,8 +43,9 @@ pipeline {
                         echo $PASSWORD | docker login -u $USERNAME --password-stdin
                         docker push $IMAGE_NAME
                     """
-                }
-            }
-        }
-    }
+                 }
+             }
+         }
+     }
+ }
 }
